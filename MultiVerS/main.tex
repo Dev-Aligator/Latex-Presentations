@@ -249,18 +249,21 @@ weak supervision and full-document context}
     \begin{frame}
         \onehalfspacing
         \frametitle{Prior models}
+
+        \begin{minipage}{0.6\textwidth}
+            \begin{block}{}
+                Given a claim $c$ and candidate abstract $a$
+            \end{block}
+        \end{minipage}
+
+        \bigskip
+        
         \textbf{These models make predictions in 2 steps:}
         \vspace*{-1em} 
         \begin{mybox}
             Predict rationales $ \hat{R}(c,a) = \{ \hat{r_1}(c,a),... \hat{r_n}(c,a)\}$ \\
             Then, make a label prediction $\hat{y}(c, f_R(\hat{R}(c,a)))$
           \end{mybox}
-        
-        \begin{minipage}{0.6\textwidth}
-            \begin{block}{}
-                Given a claim $c$ and candidate abstract $a$
-            \end{block}
-        \end{minipage}
     
     \end{frame}
         
