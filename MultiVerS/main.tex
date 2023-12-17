@@ -13,6 +13,8 @@
 \usepackage{wrapfig,lipsum}
 \usepackage{etoolbox}
 \usepackage{tikz}
+\usepackage{multirow}
+\usepackage{pifont}
 \usepackage[most]{tcolorbox}
 \usetheme{Madrid}
 \useinnertheme{circles}
@@ -40,19 +42,22 @@ weak supervision and full-document context}
 \definecolor{mylightgreencolor}{RGB}{144, 238, 144}
 \definecolor{mylightredcolor}{RGB}{255, 204, 203}
 \definecolor{mylightbluecolor}{RGB}{173,216,230}
+\definecolor{blockbackgroundcolor}{RGB}{235,235,235}
+\definecolor{blockbordercolor}{RGB}{79,79,79}
+
 \setbeamertemplate{navigation symbols}{}
 \setbeamertemplate{headline}{}
 \setbeamercolor{huge text}{fg=white}
 \setbeamertemplate{footline}{
     \leavevmode%
     \hbox{%
-        \begin{beamercolorbox}[wd=.2\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+        \begin{beamercolorbox}[wd=.1\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
             \usebeamerfont{author in head/foot}\insertshortauthor
         \end{beamercolorbox}%
-        \begin{beamercolorbox}[wd=.6\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+        \begin{beamercolorbox}[wd=.8\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
             \usebeamerfont{title in head/foot}\insertshorttitle
         \end{beamercolorbox}%
-        \begin{beamercolorbox}[wd=.2\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+        \begin{beamercolorbox}[wd=.1\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
             \insertframenumber{} / \inserttotalframenumber\hspace*{2ex} 
         \end{beamercolorbox}%
     }%
@@ -63,6 +68,24 @@ weak supervision and full-document context}
     \node[fill=structure.fg,rounded corners,inner sep=4pt, font=\large\bfseries] (tocseclabel) {\color{white}\inserttocsectionnumber};
   }\hspace{0.5em}\large\bfseries\inserttocsection\vspace{0.3em}}
 
+
+  \newtcolorbox{mybox}{
+  colback=blockbackgroundcolor, % Background color (adjust as needed)
+  colframe=blockbordercolor, % Frame color (adjust as needed)
+  rounded corners,
+  boxrule=0.2mm, % Frame width
+  arc=2mm, % Radius of the rounded corners
+  drop shadow, % Add a drop shadow (optional)
+%   width=\tcboxwidth, % Adjust the width
+%   hbox,
+}
+
+
+
+
+\newcommand{\raisedtext}[1]{%
+  \raisebox{-0.2ex}{#1}%
+}
   
 \begin{document}
 \begin{frame}
@@ -102,6 +125,28 @@ weak supervision and full-document context}
 %     \end{frame}
 
 % %-------------------------------------------------------------------%
+
+\begin{frame}
+    \onehalfspacing
+    \frametitle{Task}
+    \textbf{Definition of scientific claim verification from the S\raisedtext{CI}F\raisedtext{ACT} task:}
+    \vspace*{-1em} 
+    \begin{mybox}
+            Given a claim $c$ and a collection of \textit{candidate abstracts}. \\
+            Label $y(c,a) \in \{SUPPORTS, REFUTES, NEI\}.$ \\
+            Identify rationales $R(c, a) = \{r_1(c, a),......,r_n(c, a)\}.$
+      \end{mybox}
+
+      \begin{minipage}{0.45\textwidth}
+        \includegraphics[width=\textwidth]{Task_Definition.png}
+      \end{minipage}
+      \begin{minipage}{0.45\textwidth}
+        \includegraphics[width=\textwidth]{Json_data.png}
+      \end{minipage}
+\end{frame}
+    
+%--------------------------------------------------
+
 
 
 \begin{frame}
@@ -200,6 +245,65 @@ weak supervision and full-document context}
     
     
     %------------------------------------------------
+
+    \begin{frame}
+        \onehalfspacing
+        \frametitle{Prior models}
+        \textbf{These models make predictions in 2 steps:}
+        \vspace*{-1em} 
+        \begin{mybox}
+            Predict rationales $ \hat{R}(c,a) = \{ \hat{r_1}(c,a),... \hat{r_n}(c,a)\}$ \\
+            Then, make a label prediction $\hat{y}(c, f_R(\hat{R}(c,a)))$
+          \end{mybox}
+        
+        \begin{minipage}{0.6\textwidth}
+            \begin{block}{}
+                Given a claim $c$ and candidate abstract $a$
+            \end{block}
+        \end{minipage}
+    
+    \end{frame}
+        
+    %--------------------------------------------------
+    
+    \begin{frame}
+        \onehalfspacing
+        \frametitle{MultiVerS}
+        \begin{block}{A multitask system for full-context scientific claim verification}
+            \begin{itemize}
+                \item Predict $\hat{y}(c, a)$ directly based on an encoding of the entire claim and abstract.
+                \item Enforce consistency of $\hat{R}(c, a)$ with $\hat{y}(c; a)$ during decoding.
+            \end{itemize}
+        \end{block}
+    \end{frame}
+        
+    %--------------------------------------------------
+
+    \begin{frame}
+        \onehalfspacing
+        \frametitle{MultiVerS}
+        \textbf{Long document encoding:}
+        \vspace*{-1em} 
+        \begin{mybox}
+            A claim $c$ and candidate abstract $a$ consisting of title $t$ and sentences $s_1,...,s_n$. \\
+            The $</s>$ token following each sentence $s_i$ is notated as $</s>_i$. 
+          \end{mybox}
+
+          \begin{figure}[h]
+            \centering
+            \includegraphics[width=0.8\textwidth]{Long_document_encoding.png}
+          \end{figure}
+
+          \begin{block}{}
+            Global attention is assigned  to $<s>$ token, all tokens in $c$ and all $</s>$ tokens.
+          \end{block}
+
+
+    \end{frame}
+        
+    %--------------------------------------------------
+    
+    
     \begin{frame}
         \onehalfspacing
             \frametitle{MultiVerS}
@@ -220,6 +324,10 @@ weak supervision and full-document context}
                 \begin{figure}[h]
                     \centering
                     \includegraphics[width=\linewidth]{MultiVerS_3.png}
+                    
+                    \begin{flushleft}
+                        \textbf{Rationale Prediction:} The model analyzes each sentence's ending $</s>$ to decide if it justifies the claim, using a binary classification.
+                    \end{flushleft}
             \end{figure}
             }
 
@@ -228,6 +336,15 @@ weak supervision and full-document context}
                     \centering
                     \includegraphics[width=\linewidth]{MultiVerS_4.png}
                 \end{figure}
+            }
+
+            \only<4> {
+                \begin{flushleft}
+                    \textbf{Label Prediction:} A special $<s>$ token captures the essence of both the claim and the abstract through "global attention". \\
+
+                    \vspace{0.5em}
+                    $\longrightarrow$ Enabling accurate fact-checking label prediction for the abstract.
+                \end{flushleft}
             }
 
             \only<5-> {
@@ -252,13 +369,42 @@ weak supervision and full-document context}
 \end{frame}
     
 %------------------------------------------------
-    
 
+
+
+\begin{frame}
+    \onehalfspacing
+        \frametitle{Experiments}
+        \begin{table}[h]
+            \centering
+            \resizebox{\textwidth}{!}{
+            \begin{tabular}{lllccccccc}
+                \hline
+                \textbf{Dataset} & \textbf{Domain} & \textbf{Claim source} & \textbf{Open} & \textbf{Has NEI}  & \textbf{Claim complexity} & \textbf{Negation method} & \textbf{Train claims} & \textbf{Eval claims} & \textbf{$> 512$
+                tokens}\\
+                \hline
+                HealthVer & COVID & TREC-COVID & \ding{55} & \ding{51} & Complex & Natural & 1,622 & 230 & 14.9\% \\
+                COVIDFact & COVID & Reddit & \ding{55} & \ding{55} & Complex & Automatic & 903 & 313 & 12.4\% \\ 
+                S\raisedtext{CI}F\raisedtext{ACT} & Biomed & Citations & \ding{51} & \ding{51} & Atomic & Human & 1,109 & 300 & 27.4\% \\
+                \hline
+                F\raisedtext{EVER} & Wiki & Wikipedia & - & \ding{51} & Atomic & Human & 130,644 & - & 33.2\% \\
+                P\raisedtext{UBMED}QA & Biomed & Paper titles & - & \ding{51} & Complex & Automatic & 58,370 & - & 12.1\% \\
+                E\raisedtext{VIDENCE}I\raisedtext{NFERENCE} & Biomed & ICO prompts & - & \ding{51} & Atomic & Automatic & 7,395 & - & 42.7\% \\
+            \end{tabular}
+            }
+            \caption{Summary of datasets used in experiments }
+        \end{table}
+        
+
+
+\end{frame}
+%------------------------------------------------
+    
 \begin{frame}
 \onehalfspacing
     \frametitle{Experiments}
     \begin{minipage}{0.3\textwidth}
-        \textbf{Text datasets:}
+        \textbf{Target datasets:}
         \begin{itemize}
             \item HealthVer
             \item COVID-Fact
@@ -280,7 +426,7 @@ weak supervision and full-document context}
     \visible<3-> {
         \textbf{Traning procedure:}
         \begin{itemize}
-            \item \textbf{Stage 1:} Train on a combination of \textit{labeled out of domain} data \textit{weekly-labeled in-domain data.}
+            \item \textbf{Stage 1:} Train on a combination of \textit{labeled out of domain} data \textit{weakly-labeled in-domain data.}
             \item \textbf{Stage 2:} Continue training on data from each target dataset. 
         \end{itemize}
     }
@@ -341,7 +487,7 @@ weak supervision and full-document context}
             \only<1> {
                 \phantom{
                 \centering
-                \textbf{Weekly-supervised} in-domain data
+                \textbf{Weakly-supervised} in-domain data
                 fdjjnf
                 \includegraphics[width=\textwidth]{Stage_1_data_0.png} 
                 }
@@ -350,7 +496,7 @@ weak supervision and full-document context}
 
             \only<2-> {
                 \centering
-                \textbf{Weekly-supervised} in-domain data
+                \textbf{Weakly-supervised} in-domain data
                 \phantom{                fdjjnf
                 }
             }
@@ -386,6 +532,41 @@ weak supervision and full-document context}
 \end{frame}
 %------------------------------------------------
 
+\begin{frame}
+    \onehalfspacing
+        \frametitle{Evaluation}
+        \textbf{Abstract-level evaluation:}
+        \vspace*{-1em} 
+        \begin{mybox}
+                \textbullet \hspace{0.3em} Identifying abstracts that SUPPORT or REFUTE each claim. \\
+                \textbullet \hspace{0.3em} Predicting the correct label $y(c, a)$ is sufficient
+        \end{mybox}
+
+        \bigskip
+
+        \textbf{Sentence-level evaluation:}
+        \vspace*{-1em} 
+        \begin{mybox}
+                \textbullet \hspace{0.3em} It combines the accuracy of abstract-level label prediction with the precision of rationale identification.
+        \end{mybox}
+
+    
+\end{frame}
+%------------------------------------------------
+
+\begin{frame}
+    \onehalfspacing
+        \frametitle{Evaluation}
+        \begin{figure}[h]
+            \centering
+            \includegraphics[width=\textwidth]{Results.png}
+        \end{figure}
+        \begin{center}
+            Table 2: Performance of MultiVerS and baselines.
+        \end{center}
+    
+\end{frame}
+%------------------------------------------------
 
 \begin{frame}
     \onehalfspacing
@@ -414,7 +595,7 @@ weak supervision and full-document context}
 
 \begin{frame}
     \onehalfspacing
-        \frametitle{Results}
+        \frametitle{Ablations: Training strategy}
 
         \only<1> {
             \includegraphics[width=1\textwidth]{Crop/Ablations_1.png}
@@ -456,9 +637,11 @@ weak supervision and full-document context}
         \bibitem[Stanford]{p2}
         \href{https://aclanthology.org/2023.findings-acl.387.pdf}{Scientific Fact-Checking: A Survey of Resources and Approaches}
 			\newblock Juraj Vladika and Florian Matthes
+        \bibitem[Stanford]{p3} Longformer: The Long-Document Transformer
+        \newblock Iz Beltagy, Matthew E. Peters and Arman Cohan
 		
         \hspace{-1.9em}\includegraphics[width=1.5em]{Icons/github.png}
-        \textcolor{blue}{\href{https://github.com/ragavsachdeva/The-Change-You-Want-to-See/tree/main?fbclid=IwAR0LKUHmVIEYSDTCgl2KeV5jir1pUlMSYJTbHbirilqWH_eZ4N9FxHwTQto\#datasets}{Code and model checkpoints for the MultiVerS model}}
+        \textcolor{blue}{\href{https://github.com/dwadden/multivers}{Code and model checkpoints for the MultiVerS model}}
           \newblock \textcolor{black}{dwadden/multivers}
 	\end{thebibliography}
 \end{frame}
