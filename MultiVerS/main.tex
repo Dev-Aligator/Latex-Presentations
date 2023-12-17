@@ -325,9 +325,6 @@ weak supervision and full-document context}
                     \centering
                     \includegraphics[width=\linewidth]{MultiVerS_3.png}
                     
-                    \begin{flushleft}
-                        \textbf{Rationale Prediction:} The model analyzes each sentence's ending $</s>$ to decide if it justifies the claim, using a binary classification.
-                    \end{flushleft}
             \end{figure}
             }
 
@@ -337,16 +334,6 @@ weak supervision and full-document context}
                     \includegraphics[width=\linewidth]{MultiVerS_4.png}
                 \end{figure}
             }
-
-            \only<4> {
-                \begin{flushleft}
-                    \textbf{Label Prediction:} A special $<s>$ token captures the essence of both the claim and the abstract through "global attention". \\
-
-                    \vspace{0.5em}
-                    $\longrightarrow$ Enabling accurate fact-checking label prediction for the abstract.
-                \end{flushleft}
-            }
-
             \only<5-> {
                  \begin{minipage}{0.52\textwidth}
                     {\Large
