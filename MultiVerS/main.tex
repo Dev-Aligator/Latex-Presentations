@@ -14,6 +14,7 @@
 \usepackage{etoolbox}
 \usepackage{tikz}
 \usepackage{multirow}
+\usepackage{verbatim}
 \usepackage{pifont}
 \usepackage[most]{tcolorbox}
 \usetheme{Madrid}
@@ -557,6 +558,183 @@ weak supervision and full-document context}
     
 \end{frame}
 %------------------------------------------------
+\begin{frame}[fragile]
+    \onehalfspacing
+        \frametitle{Our Reproduction Performance}
+        \textbf{covidfact\_covidfact.jsonl:}
+        \vspace*{-1em} 
+        \begin{mybox}
+        \begin{semiverbatim}
+\{
+    "abstract_label_only_precision": 0.7728706624605678,
+    "abstract_label_only_recall": 0.7728706624605678,
+    "abstract_label_only_f1": 0.7728706624605678,
+    "sentence_label_precision": 0.41694915254237286,
+    "sentence_label_recall": 0.458955223880597,
+    "sentence_label_f1": 0.43694493783303723
+\}\end{semiverbatim}
+    \end{mybox}
+\end{frame}
+
+%------------------------------------------------
+
+
+\begin{frame}[fragile]
+    \onehalfspacing
+        \frametitle{Our Reproduction Performance}
+        \textbf{covidfact\_fever.jsonl:}
+\vspace*{-1em} 
+\begin{mybox}
+\begin{semiverbatim}
+\{
+    "abstract_label_only_precision": 0.9583333333333334,
+    "abstract_label_only_recall": 0.14511041009463724,
+    "abstract_label_only_f1": 0.25205479452054796,
+    "sentence_label_precision": 0.631578947368421,
+    "sentence_label_recall": 0.04477611940298507,
+    "sentence_label_f1": 0.08362369337979093
+\}\end{semiverbatim}
+\end{mybox}
+\end{frame}
+%------------------------------------------------
+
+
+
+\begin{frame}[fragile]
+    \onehalfspacing
+        \frametitle{Our Reproduction Performance}
+        \textbf{covidfact\_fever\_sci.jsonl:}
+\vspace*{-1em} 
+\begin{mybox}
+\begin{semiverbatim}
+\{
+    "abstract_label_only_precision": 0.4882154882154882,
+    "abstract_label_only_recall": 0.45741324921135645,
+    "abstract_label_only_f1": 0.4723127035830619,
+    "sentence_label_precision": 0.5444444444444444,
+    "sentence_label_recall": 0.0914179104477612,
+    "sentence_label_f1": 0.15654952076677317
+\}\end{semiverbatim}
+\end{mybox}
+\end{frame}
+%------------------------------------------------
+
+
+
+\begin{frame}[fragile]
+    \onehalfspacing
+        \frametitle{Our Reproduction Performance}
+        \textbf{healthver\_fever.jsonl:}
+\vspace*{-1em} 
+\begin{mybox}
+\begin{semiverbatim}
+\{
+    "abstract_label_only_precision": 0.8,
+    "abstract_label_only_recall": 0.00667779632721202,
+    "abstract_label_only_f1": 0.013245033112582783,
+    "sentence_label_precision": 1.0,
+    "sentence_label_recall": 0.0027223230490018148,
+    "sentence_label_f1": 0.005429864253393665
+\}\end{semiverbatim}
+\end{mybox}
+\end{frame}
+%------------------------------------------------
+
+\begin{frame}[fragile]
+    \onehalfspacing
+        \frametitle{Our Reproduction Performance}
+        \textbf{healthver\_fever\_sci.jsonl:}
+\vspace*{-1em} 
+\begin{mybox}
+\begin{semiverbatim}
+\{
+    "abstract_label_only_precision": 0.6059113300492611,
+    "abstract_label_only_recall": 0.20534223706176963,
+    "abstract_label_only_f1": 0.30673316708229426,
+    "sentence_label_precision": 0.40625,
+    "sentence_label_recall": 0.011796733212341199,
+    "sentence_label_f1": 0.022927689594356263
+\}\end{semiverbatim}
+\end{mybox}
+\end{frame}
+%------------------------------------------------
+
+\begin{frame}[fragile]
+    \onehalfspacing
+        \frametitle{Our Reproduction Performance}
+        \textbf{healthver\_healthver.jsonl:}
+\vspace*{-1em} 
+\begin{mybox}
+\begin{semiverbatim}
+\{
+    "abstract_label_only_precision": 0.7892918825561313,
+    "abstract_label_only_recall": 0.7629382303839732,
+    "abstract_label_only_f1": 0.7758913412563666,
+    "sentence_label_precision": 0.7194525904203324,
+    "sentence_label_recall": 0.6678765880217786,
+    "sentence_label_f1": 0.6927058823529412
+\}\end{semiverbatim}
+\end{mybox}
+\end{frame}
+%------------------------------------------------
+
+\begin{frame}[fragile]
+    \onehalfspacing
+        \frametitle{Our Reproduction Performance}
+        \textbf{scifact\_fever.jsonl:}
+\vspace*{-1em} 
+\begin{mybox}
+\begin{semiverbatim}
+\{
+    "abstract_label_only_precision": 0.8378378378378378,
+    "abstract_label_only_recall": 0.13963963963963963,
+    "abstract_label_only_f1": 0.23938223938223935,
+    "sentence_label_precision": 0.7307692307692307,
+    "sentence_label_recall": 0.051351351351351354,
+    "sentence_label_f1": 0.09595959595959597
+\}\end{semiverbatim}
+\end{mybox}
+\end{frame}
+%------------------------------------------------
+
+\begin{frame}[fragile]
+    \onehalfspacing
+        \frametitle{Our Reproduction Performance}
+        \textbf{scifact\_fever\_sci.jsonl:}
+\vspace*{-1em} 
+\begin{mybox}
+\begin{semiverbatim}
+\{
+    "abstract_label_only_precision": 0.4900990099009901,
+    "abstract_label_only_recall": 0.44594594594594594,
+    "abstract_label_only_f1": 0.4669811320754717,
+    "sentence_label_precision": 0.7017543859649122,
+    "sentence_label_recall": 0.10810810810810811,
+    "sentence_label_f1": 0.1873536299765808
+\}\end{semiverbatim}
+\end{mybox}
+\end{frame}
+%------------------------------------------------
+
+\begin{frame}[fragile]
+    \onehalfspacing
+        \frametitle{Our Reproduction Performance}
+        \textbf{scifact\_scifact.jsonl:}
+\vspace*{-1em} 
+\begin{mybox}
+\begin{semiverbatim}
+\{
+    "abstract_label_only_precision": 0.7383177570093458,
+    "abstract_label_only_recall": 0.7117117117117117,
+    "abstract_label_only_f1": 0.7247706422018348,
+    "sentence_label_precision": 0.6739130434782609,
+    "sentence_label_recall": 0.6702702702702703,
+    "sentence_label_f1": 0.6720867208672086
+\}\end{semiverbatim}
+\end{mybox}
+\end{frame}
+%------------------------------------------------
+
 
 \begin{frame}
     \onehalfspacing
